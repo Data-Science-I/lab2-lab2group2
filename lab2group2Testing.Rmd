@@ -1,0 +1,30 @@
+---
+title: "Testing Functions"
+author: "Group2-Jing Lin, Yael Yossefy, Yaqian Han"
+format: html
+editor: visual
+---
+```{r,echo=FALSE}
+knitr::opts_chunk$set(cache=TRUE, error=FALSE, message=FALSE, warning=FALSE,
+                      echo=T, tidy.opts=list(width.cutoff=60),tidy=TRUE)
+
+```
+
+## Function 1
+
+Function 1: Write a function that makes a boxplot of payments by DRG code. Make it an option for your function to do this for either the average Medicare payments, the average total payment, or the average covered charges
+
+```{r load libraries}
+library(ggplot2)
+library(dplyr)
+library(lab2group2package)
+```
+
+```{r load data}
+DRG_data <- read.csv("DRG_data.csv")
+```
+
+```{r}
+# Testing boxplot_function
+boxplot_function(DRG_data, "medicare")
+```
