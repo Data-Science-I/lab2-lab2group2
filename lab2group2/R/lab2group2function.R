@@ -28,9 +28,9 @@ boxplot_function <- function(data, payment_type) {
   # Create the boxplot
   ggplot(new_data, aes_string(x = "DRG_code", y = payment_column)) +
     geom_boxplot() +
-    labs(title = paste("Boxplot of", payment_type, "payments by DRG Code"),
+    labs(title = paste("Boxplot of", payment_type, "Payments by DRG Code"),
          x = "DRG Code",
-         y = paste("Average", payment_type, "payments")) +
+         y = paste("Average", payment_type, "Payments")) +
     theme_minimal()+
     theme(axis.text.x = element_text(angle = 90, size=6))
 
