@@ -35,3 +35,28 @@ boxplot_function <- function(data, payment_type) {
     theme(axis.text.x = element_text(angle = 90, size=6))
 
 }
+
+#' Calculate Summary Statistics for DRG Codes
+#'
+#' This function calculates statistics for average Medicare payments across all DRG codes.
+#' Users can select to compute either the mean, median, or standard deviation.
+#'
+#' @param data Data frame containing DRG data.
+#' @param stat A string specifying the statistic to calculate: "mean", "median", or "sd".
+#' @return A numeric value representing the computed statistic.
+#' @examples
+#' summary_function(drg_data, "mean")
+#' @export
+summary_function <- function(data, stat = "mean") {
+  if (!(stat %in% c("mean", "median", "sd"))) {
+    stop("Invalid stat type. Choose 'mean', 'median', or 'sd'")
+  }
+
+  # Calculate the specified statistic
+  result <- switch(stat,
+                   mean = mean(data$Average.Medicare.Payment, na.rm = TRUE),
+                   median = median(data$Average.Medicare.Payment, na.rm = TRUE),
+                   sd = sd(data$Average.Medicare.Payment, na.rm = TRUE))
+
+  return(result)
+}
