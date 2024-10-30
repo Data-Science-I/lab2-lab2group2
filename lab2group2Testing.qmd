@@ -1,0 +1,66 @@
+---
+title: "Testing Functions"
+author: "Group2-Jing Lin, Yael Yossefy, Yaqian Han"
+format: html
+editor: visual
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    fig_height: 6
+    fig_width: 8
+---
+
+```{r,echo=FALSE}
+knitr::opts_chunk$set(cache=TRUE, error=FALSE, message=FALSE, warning=FALSE,
+                      echo=T, tidy.opts=list(width.cutoff=60),tidy=TRUE)
+
+```
+
+## Function 1
+
+Function 1: Write a function that makes a boxplot of payments by DRG code. Make it an option for your function to do this for either the average Medicare payments, the average total payment, or the average covered charges
+
+```{r load libraries}
+library(ggplot2)
+library(dplyr)
+library(lab2group2)
+```
+
+```{r load data}
+DRG_data <- read.csv("DRG_data.csv")
+```
+
+```{r}
+# Testing boxplot_function
+plot1 <- boxplot_function(DRG_data, "medicare")
+print(plot1)
+
+plot2 <- boxplot_function(DRG_data, "total")
+print(plot2)
+
+plot3 <- boxplot_function(DRG_data, "covered")
+print(plot3)
+```
+
+## Function 2
+
+Function 2: Write a function that calculates statistics over all of the DRG codes for average Medicare payments. Make it an option in your function to calculate either the mean, median, or standard deviation of the DRG codes.
+
+```{r}
+# Testing mean
+mean_payment <- summary_function(DRG_data, "mean")
+print("Mean of average Medicare payments by DRG Definition:")
+print(mean_payment)
+
+# Testing median
+median_payment <- summary_function(DRG_data, "median")
+print("Median of average Medicare payments by DRG Definition:")
+print(median_payment)
+
+# Testing standard deviation
+sd_payment <- summary_function(DRG_data, "sd")
+print("Standard deviation of average Medicare payments by DRG Definition:")
+print(sd_payment)
+```
