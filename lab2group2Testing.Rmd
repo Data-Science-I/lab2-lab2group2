@@ -25,7 +25,21 @@ Function 1: Write a function that makes a boxplot of payments by DRG code. Make 
 ```{r load libraries}
 library(ggplot2)
 library(dplyr)
+library(devtools)
+library(roxygen2)
+```
+
+
+```{r}
+# Install the 'lab2-group2' package from GitHub using the devtools package
+devtools::install_github("Data-Science-I/lab2-lab2group2/lab2group2")
+# Loading the package
 library(lab2group2)
+# 'boxplot_drg" is a function that generates boxplots for DRG payment data
+lab2group2::boxplot_function
+# 'calc_stats_drg’ is a function that calculates summary statistics for DRGpayments
+lab2group2::summary_function
+# 'data’ is a dataset included in the DRGPayments package
 ```
 
 ```{r load data}

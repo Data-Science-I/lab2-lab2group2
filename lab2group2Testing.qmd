@@ -30,7 +30,8 @@ library(roxygen2)
 ```
 
 ```{r}
-
+# Install the 'lab2-group2' package from GitHub using the devtools package
+devtools::install_github("Data-Science-I/lab2-lab2group2/lab2group2")
 # Loading the package
 library(lab2group2)
 # 'boxplot_drg" is a function that generates boxplots for DRG payment data
