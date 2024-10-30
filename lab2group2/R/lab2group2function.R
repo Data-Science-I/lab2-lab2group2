@@ -1,3 +1,14 @@
+#' Load DRG Data from CSV
+#'
+#' This function loads the DRG_data.csv file included in the package.
+#' @return A data frame containing the DRG data.
+#' @export
+load_DRG_data <- function() {
+  # Your code to load the data
+  data <- read.csv(system.file("extdata", "DRG_data.csv", package = "lab2group2"))
+  return(data)
+}
+
 #' Generate Boxplot by DRG Code
 #'
 #' This function generates a boxplot of payments by DRG code.
@@ -52,7 +63,7 @@ summary_function <- function(data, stat = "mean") {
   if (!(stat %in% c("mean", "median", "sd"))) {
     stop("Invalid stat type. Choose 'mean', 'median', or 'sd'")
   }
-  
+
   # Calculate the specified statistic by 'DRG.Definition' group
   result <- data %>%
     group_by(DRG.Definition) %>%
@@ -62,6 +73,6 @@ summary_function <- function(data, stat = "mean") {
                           median = median(Average.Medicare.Payments, na.rm = TRUE),
                           sd = sd(Average.Medicare.Payments, na.rm = TRUE))
     )
-  
+
   return(result)
 }
