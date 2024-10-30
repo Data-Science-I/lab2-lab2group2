@@ -13,7 +13,7 @@ boxplot_function <- function(data, payment_type) {
   payment_column=case_when(
     payment_type=="medicare" ~ "Average.Medicare.Payments",
     payment_type=="total" ~ "Average.Total.Payments",
-    payment_type=="covered" ~ "Average.Covered.Payments"
+    payment_type=="covered" ~ "Average.Covered.Charges"
   )
 
   # Check if the chosen column exists in the data
@@ -47,16 +47,21 @@ boxplot_function <- function(data, payment_type) {
 #' @examples
 #' summary_function(drg_data, "mean")
 #' @export
+# Define the summary function
 summary_function <- function(data, stat = "mean") {
   if (!(stat %in% c("mean", "median", "sd"))) {
     stop("Invalid stat type. Choose 'mean', 'median', or 'sd'")
   }
-
-  # Calculate the specified statistic
-  result <- switch(stat,
-                   mean = mean(data$Average.Medicare.Payment, na.rm = TRUE),
-                   median = median(data$Average.Medicare.Payment, na.rm = TRUE),
-                   sd = sd(data$Average.Medicare.Payment, na.rm = TRUE))
-
+  
+  # Calculate the specified statistic by 'DRG.Definition' group
+  result <- data %>%
+    group_by(DRG.Definition) %>%
+    summarise(
+      stat_value = switch(stat,
+                          mean = mean(Average.Medicare.Payments, na.rm = TRUE),
+                          median = median(Average.Medicare.Payments, na.rm = TRUE),
+                          sd = sd(Average.Medicare.Payments, na.rm = TRUE))
+    )
+  
   return(result)
 }
